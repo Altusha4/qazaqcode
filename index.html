@@ -3,56 +3,109 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Qazaq Cinema Code | Ғылыми жоба</title>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <title>Qazaq Cinema Code | Интерактивті платформа</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
 
   <style>
-    /* CSS СТИЛЬДЕРІ */
     :root {
-      --primary: #006064; /* Қанық көк-жасыл */
-      --secondary: #c4a006; /* Алтын түстес */
+      --primary: #006064;
+      --secondary: #c4a006;
       --light: #f4f7f6;
       --dark: #1a1a1a;
+      --card-bg: #ffffff;
+      --header-bg: rgba(0, 96, 100, 0.9);
     }
+
+    /* Dark Mode Settings */
+    body.dark-theme {
+      --light: #121212;
+      --dark: #e0e0e0;
+      --card-bg: #1e1e1e;
+      --header-bg: rgba(18, 18, 18, 0.95);
+    }
+
+    * { box-sizing: border-box; }
 
     body {
-      font-family: 'Times New Roman', serif; /* Талап бойынша */
-      margin: 0;
-      padding: 0;
+      font-family: 'Times New Roman', serif;
+      margin: 0; padding: 0;
       background-color: var(--light);
       color: var(--dark);
-      line-height: 1.6;
+      transition: background 0.4s ease, color 0.4s ease;
+      scroll-behavior: smooth;
     }
 
+    /* --- NAVBAR --- */
     header {
-      background: rgba(0, 96, 100, 0.95);
-      color: white;
-      padding: 15px 5%;
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      padding: 25px 5%;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      position: fixed;
-      width: 90%;
-      top: 0;
       z-index: 1000;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      transition: all 0.4s ease;
     }
 
-    .logo { font-size: 24px; font-weight: bold; font-family: 'Playfair Display', serif; }
+    header.scrolled {
+      background: var(--header-bg);
+      padding: 15px 5%;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+      backdrop-filter: blur(10px);
+    }
+
+    .logo {
+      font-size: 26px;
+      font-weight: bold;
+      font-family: 'Playfair Display', serif;
+      color: white;
+      text-decoration: none;
+    }
     .logo span { color: var(--secondary); }
 
-    nav ul { display: flex; list-style: none; margin: 0; }
-    nav ul li { margin-left: 25px; }
-    nav ul li a { color: white; text-decoration: none; font-weight: 500; transition: 0.3s; }
-    nav ul li a:hover { color: var(--secondary); }
+    nav { display: flex; align-items: center; gap: 40px; }
 
-    /* Hero Section */
+    nav ul { display: flex; list-style: none; margin: 0; padding: 0; gap: 30px; }
+
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      position: relative;
+      padding: 5px 0;
+      transition: 0.3s;
+    }
+
+    nav ul li a::after {
+      content: '';
+      position: absolute;
+      width: 0; height: 2px;
+      bottom: 0; left: 0;
+      background: var(--secondary);
+      transition: width 0.3s ease;
+    }
+
+    nav ul li a:hover::after { width: 100%; }
+
+    .theme-toggle {
+      background: rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      color: white;
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: 0.3s;
+      font-size: 18px;
+    }
+
+    .theme-toggle:hover { background: var(--secondary); transform: rotate(20deg); }
+
+    /* --- HERO SECTION --- */
     .hero {
-      height: 80vh;
-      background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)),
-      url('https://images.unsplash.com/photo-1485846234645-a62644f84728?q=80&w=2059&auto=format&fit=crop');
-      background-size: cover;
-      background-position: center;
+      height: 100vh;
+      background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
+      url('https://ticketon.kz/media/upload/25442u52703_business-po-kazakhski-v-indii-film.jpg') center/cover;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -62,256 +115,322 @@
       padding: 0 20px;
     }
 
-    .hero h1 { font-size: 3rem; margin-bottom: 20px; font-family: 'Playfair Display', serif; }
-    .hero p { font-size: 1.2rem; max-width: 800px; margin-bottom: 30px; }
+    .hero h1 { font-size: 3.5rem; margin-bottom: 20px; font-family: 'Playfair Display', serif; }
+    .hero p { font-size: 1.3rem; max-width: 800px; margin-bottom: 30px; opacity: 0.9; }
 
     .btn-main {
       background: var(--secondary);
       color: white;
-      padding: 15px 40px;
+      padding: 18px 45px;
       border: none;
-      border-radius: 30px;
+      border-radius: 50px;
       font-size: 18px;
+      font-weight: bold;
       cursor: pointer;
       transition: 0.3s;
       text-transform: uppercase;
-      font-weight: bold;
+      box-shadow: 0 4px 15px rgba(196, 160, 6, 0.4);
     }
-    .btn-main:hover { transform: scale(1.05); background: #b39105; }
+    .btn-main:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(196, 160, 6, 0.6); }
 
-    /* Catalog Section */
-    .section-title { text-align: center; padding: 50px 0 20px; font-size: 2.5rem; color: var(--primary); }
+    /* --- CONTENT CONTAINER --- */
+    .container { width: 90%; max-width: 1200px; margin: auto; padding: 80px 0; }
 
-    .container { width: 90%; margin: auto; }
+    .section-title {
+      text-align: center;
+      font-size: 2.5rem;
+      margin-bottom: 50px;
+      color: var(--primary);
+      font-family: 'Playfair Display', serif;
+    }
 
+    /* --- CATALOG --- */
     .movie-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 30px;
-      padding-bottom: 50px;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 35px;
     }
 
     .movie-card {
-      background: white;
-      border-radius: 15px;
+      background: var(--card-bg);
+      border-radius: 20px;
       overflow: hidden;
-      box-shadow: 0 10px 20px rgba(0,0,0,0.05);
-      transition: 0.3s;
-      border: 1px solid #eee;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+      transition: 0.4s;
     }
-    .movie-card:hover { transform: translateY(-10px); }
+    .movie-card:hover { transform: translateY(-15px); }
 
-    .movie-info { padding: 20px; }
-    .movie-info h3 { margin: 0 0 10px; color: var(--primary); }
+    .movie-img {
+      height: 250px;
+      background-size: cover;
+      background-position: center;
+    }
 
-    /* Талап: Мәдени код батырмалары */
-    .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 15px; }
+    .movie-info { padding: 25px; }
+    .movie-info h3 { margin: 0 0 10px; font-size: 1.5rem; }
+
+    .tags { display: flex; gap: 10px; margin-bottom: 20px; }
     .tag {
-      background: #e0f2f1;
-      color: var(--primary);
-      padding: 5px 12px;
-      border-radius: 15px;
-      font-size: 12px;
-      font-weight: bold;
-      cursor: help;
+      font-size: 11px; font-weight: bold;
+      background: #e0f2f1; color: var(--primary);
+      padding: 5px 12px; border-radius: 20px;
     }
 
     .code-btn {
       width: 100%;
-      padding: 12px;
+      padding: 14px;
       background: var(--primary);
       color: white;
       border: none;
-      border-radius: 8px;
-      cursor: pointer;
+      border-radius: 12px;
       font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .code-btn:hover { background: #004d40; }
+
+    /* --- QUIZ --- */
+    .quiz-section {
+      background: var(--primary);
+      color: white;
+      border-radius: 30px;
+      padding: 60px 40px;
+      margin-top: 100px;
+      text-align: center;
     }
 
-    /* Survey Stats Section */
-    .stats-container {
-      background: white;
-      padding: 40px;
-      border-radius: 15px;
-      margin-bottom: 50px;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-around;
-      align-items: center;
+    .quiz-options { display: flex; justify-content: center; gap: 20px; margin-top: 30px; flex-wrap: wrap; }
+    .quiz-btn {
+      padding: 15px 30px;
+      background: var(--secondary);
+      color: white; border: none;
+      border-radius: 15px; font-weight: bold;
+      cursor: pointer; transition: 0.3s;
+    }
+    .quiz-btn:hover { transform: scale(1.05); }
+
+    /* --- STATS --- */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 30px;
+      margin-top: 80px;
+      text-align: center;
     }
 
-    .stat-item { text-align: center; margin: 20px; }
-    .stat-number { font-size: 3rem; font-weight: bold; color: var(--secondary); display: block; }
+    .stat-card { background: var(--card-bg); padding: 40px; border-radius: 20px; box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
+    .stat-number { font-size: 3rem; font-weight: bold; color: var(--secondary); display: block; margin-bottom: 10px; }
 
-    /* Modal (Smart Dictionary) */
+    /* --- MODAL --- */
     .modal {
       display: none;
-      position: fixed;
-      z-index: 2000;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.8);
-      backdrop-filter: blur(5px);
+      position: fixed; z-index: 2000;
+      left: 0; top: 0; width: 100%; height: 100%;
+      background: rgba(0,0,0,0.85); backdrop-filter: blur(8px);
     }
 
     .modal-content {
-      background: white;
-      margin: 10% auto;
-      padding: 40px;
-      width: 40%;
-      border-radius: 20px;
+      background: var(--card-bg);
+      margin: 8% auto;
+      padding: 50px;
+      width: 90%; max-width: 600px;
+      border-radius: 30px;
       position: relative;
-      animation: slideDown 0.4s;
+      box-shadow: 0 25px 50px rgba(0,0,0,0.5);
     }
 
-    @keyframes slideDown {
-      from { transform: translateY(-50px); opacity: 0; }
-      to { transform: translateY(0); opacity: 1; }
+    .close-modal {
+      position: absolute; right: 25px; top: 20px;
+      font-size: 35px; cursor: pointer; color: var(--primary);
     }
 
-    .close { position: absolute; right: 20px; top: 15px; font-size: 30px; cursor: pointer; }
+    footer {
+      background: #0a0a0a;
+      color: white;
+      padding: 60px 5%;
+      text-align: center;
+      margin-top: 100px;
+    }
 
-    #modalTitle { color: var(--primary); font-size: 24px; border-bottom: 2px solid var(--secondary); padding-bottom: 10px; }
-    #modalDescription { font-size: 18px; margin-top: 20px; }
+    /* Анимации */
+    [data-aos] { opacity: 0; transform: translateY(30px); transition: 0.8s ease-out; }
+    [data-aos].active { opacity: 1; transform: translateY(0); }
 
-    footer { background: var(--dark); color: white; text-align: center; padding: 30px; margin-top: 50px; }
   </style>
 </head>
 <body>
 
-<header>
-  <div class="logo">QazaqCinema<span>Code</span></div>
+<header id="mainHeader">
+  <a href="#" class="logo">QazaqCinema<span>Code</span></a>
   <nav>
     <ul>
       <li><a href="#catalog">Каталог</a></li>
-      <li><a href="#stats">Статистика</a></li>
-      <li><a href="#dictionary">Сөздік</a></li>
+      <li><a href="#quiz">Квиз</a></li>
+      <li><a href="#stats">Зерттеу</a></li>
     </ul>
+    <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn">🌙</button>
   </nav>
 </header>
 
 <section class="hero">
-  <h1>Комедия — ұлттық кодтың айнасы</h1>
-  <p>Ғылыми жоба аясында жасалған интерактивті каталог. Мұнда қазақ комедияларындағы салт-дәстүрлер мен мінез-құлық ерекшеліктері заманауи тұрғыда талданады.</p>
-  <button class="btn-main" onclick="location.href='#catalog'">Зерттеуді бастау</button>
+  <h1 data-aos>Ұлттық код және Кино</h1>
+  <p data-aos>Комедиялық фильмдердегі қазақы мінез бен салт-дәстүрді зерттеуге арналған интерактивті платформа</p>
+  <button class="btn-main" onclick="document.getElementById('catalog').scrollIntoView()" data-aos>Зерттеуді бастау</button>
 </section>
 
 <div class="container">
-  <h2 id="catalog" class="section-title">Кино-Каталог</h2>
-  <div class="movie-grid">
 
-    <div class="movie-card">
-      <div style="height: 200px; background: #ddd url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSq4F-94Yc3S_fT7V6R9mX75f56976') center/cover;"></div>
+  <h2 id="catalog" class="section-title" data-aos>Кино-Каталог</h2>
+
+  <div class="movie-grid">
+    <div class="movie-card" data-aos>
+      <div class="movie-img" style="background-image: url('https://sxodim.com/uploads/posts/2018/12/26/og_386567_1545802271.jpg');"></div>
       <div class="movie-info">
         <div class="tags">
-          <span class="tag">#Қонақжайлылық</span>
-          <span class="tag">#Менталитет</span>
+          <span class="tag">#ҚОНАҚЖАЙЛЫЛЫҚ</span>
+          <span class="tag">#НАМЫС</span>
         </div>
         <h3>Бизнес по-казахски</h3>
-        <p>Қазақ бизнесі мен қонақ күту дәстүрінің жаһандық деңгейдегі қақтығысы.</p>
-        <button class="code-btn" onclick="openDictionary('hospitality')">Мәдени кодты ашу</button>
+        <p>Қазақ қонақжайлылығы мен халықаралық имидж арасындағы қақтығыс.</p>
+        <button class="code-btn" onclick="openDict('hospitality')">Мәдени талдау</button>
       </div>
     </div>
 
-    <div class="movie-card">
-      <div style="height: 200px; background: #ddd url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR07W8k0Lh-Cshf3-x2Eis7H8O0698') center/cover;"></div>
+    <div class="movie-card" data-aos>
+      <div class="movie-img" style="background-image: url('https://bro.kz/static/images/media/3/30043/conversions/7c05001f654b419c80cc1b702ec5611d-main_image.jpg');"></div>
       <div class="movie-info">
         <div class="tags">
-          <span class="tag">#СәлемСалу</span>
-          <span class="tag">#Отбасы</span>
+          <span class="tag">#СӘЛЕМ_САЛУ</span>
+          <span class="tag">#ОТБАСЫ</span>
         </div>
         <h3>Келінжан</h3>
-        <p>Ауыл өмірі мен қазақ келіндерінің арасындағы сыйластық пен шынайы мінез-құлық.</p>
-        <button class="code-btn" onclick="openDictionary('kelin')">Мәдени кодты ашу</button>
+        <p>Ауыл өмірі мен қазақ келіндерінің арасындағы шынайы сыйластық.</p>
+        <button class="code-btn" onclick="openDict('kelin')">Мәдени талдау</button>
       </div>
     </div>
 
-    <div class="movie-card">
-      <div style="height: 200px; background: #ddd url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT6f8mK_x_z8n-R_sP7v9U6E123') center/cover;"></div>
+    <div class="movie-card" data-aos>
+      <div class="movie-img" style="background-image: url('https://static.tvicdn.com/images/series/000/118/386/73919_232x328.jpg');"></div>
       <div class="movie-info">
         <div class="tags">
-          <span class="tag">#Құдалық</span>
-          <span class="tag">#Этикет</span>
+          <span class="tag">#ҚҰДАЛЫҚ</span>
+          <span class="tag">#КИІТ</span>
         </div>
         <h3>Құдалар</h3>
-        <p>Екі түрлі өңірдің құдалық дәстүрлері мен сыйластық нормаларының әзілмен берілуі.</p>
-        <button class="code-btn" onclick="openDictionary('kuda')">Мәдени кодты ашу</button>
+        <p>Екі түрлі өңірдің салт-дәстүрлері мен құдалық этикетінің әзілмен берілуі.</p>
+        <button class="code-btn" onclick="openDict('kuda')">Мәдени талдау</button>
       </div>
     </div>
-
   </div>
 
-  <h2 id="stats" class="section-title">Зерттеу нәтижелері</h2>
-  <div class="stats-container">
-    <div class="stat-item">
+  <section id="quiz" class="quiz-section" data-aos>
+    <h2>🎥 Кино-Викторина</h2>
+    <p id="q-text" style="font-size: 1.5rem; margin-bottom: 20px;">Қай фильмде қазақтың "сәлем салу" дәстүрі басты мәдени код ретінде көрсетілген?</p>
+    <div class="quiz-options">
+      <button class="quiz-btn" onclick="ans(false)">Бизнес по-казахски</button>
+      <button class="quiz-btn" onclick="ans(true)">Келінжан</button>
+      <button class="quiz-btn" onclick="ans(false)">Құдалар</button>
+    </div>
+    <p id="q-feedback" style="margin-top: 20px; font-weight: bold; font-size: 1.2rem;"></p>
+  </section>
+
+  <h2 id="stats" class="section-title" data-aos style="margin-top: 100px;">Зерттеу Статистикасы</h2>
+  <div class="stats-grid">
+    <div class="stat-card" data-aos>
       <span class="stat-number">30</span>
-      <p>Респондент</p>
+      <p>Респондент қатысты</p>
     </div>
-    <div class="stat-item">
+    <div class="stat-card" data-aos>
       <span class="stat-number">85%</span>
-      <p>Комедияны ұнатады</p>
+      <p>Ұлттық кодты таныды</p>
     </div>
-    <div class="stat-item">
-      <span class="stat-number">72%</span>
-      <p>Дәстүрді кинодан таниды</p>
-    </div>
-    <div class="stat-item">
-      <span class="stat-number">90%</span>
-      <p>Ұлттық юморды қолдайды</p>
+    <div class="stat-card" data-aos>
+      <span class="stat-number">92%</span>
+      <p>Юмор арқылы қабылдады</p>
     </div>
   </div>
+
 </div>
 
-<div id="dictionaryModal" class="modal">
+<div id="smartModal" class="modal">
   <div class="modal-content">
-    <span class="close" onclick="closeModal()">&times;</span>
-    <h3 id="modalTitle">Сөздік</h3>
-    <p id="modalDescription">Жүктелуде...</p>
-    <hr>
+    <span class="close-modal" onclick="closeM()">&times;</span>
+    <h2 id="m-title" style="color: var(--primary); margin-top: 0;"></h2>
+    <hr style="border: 1px solid var(--secondary); margin: 20px 0;">
+    <p id="m-desc" style="font-size: 1.2rem; line-height: 1.8;"></p>
+    <div style="margin-top: 30px; padding: 15px; background: var(--light); border-left: 5px solid var(--secondary);">
+      <strong>Ғылыми түйін:</strong> Бұл элемент кинода ұлттық бірегейлікті сақтаудың құралы болып табылады.
+    </div>
   </div>
 </div>
 
 <footer>
-  <p>© 2026 Ертай Алтынай, Нуралы Нурай</p>
-  </header>
-
-  <script>
-    /* JS ФУНКЦИЯЛАРЫ */
-    const data = {
-      'hospitality': {
-        title: "Мәдени код: Қонақжайлылық",
-        desc: "Қазақ комедияларындағы басты тақырып. 'Бизнес по-казахски' фильмінде қонақ күту — тек тамақ беру емес, рух пен намыс мәселесі ретінде көрсетіледі. Сөздік: 'Қонақасы' — қонақтың ризалығы үшін тартылатын ең таңдаулы дәм."
-      },
-      'kelin': {
-        title: "Мәдени код: Ибалық және Сәлем салу",
-        desc: "'Келінжан' фильмінде келіннің сәлем салуы — ескішілдік емес, үлкенге деген құрметтің визуальды символы. Бұл мінез-құлық отбасының ішкі иерархиясын сақтайды."
-      },
-      'kuda': {
-        title: "Мәдени код: Құдалық этикеті",
-        desc: "Құдалық — қазақ дипломатиясының мектебі. Фильмдерде 'Киіт кигізу', 'Төс қағыстыру' сияқты дәстүрлер арқылы екі рудың немесе екі отбасының мәдени жақындасуы юмормен сипатталады."
-      }
-    };
-
-    function openDictionary(key) {
-      const modal = document.getElementById("dictionaryModal");
-      document.getElementById("modalTitle").innerText = data[key].title;
-      document.getElementById("modalDescription").innerText = data[key].desc;
-      modal.style.display = "block";
-    }
-
-    function closeModal() {
-      document.getElementById("dictionaryModal").style.display = "none";
-    }
-
-    // Жабу батырмасынан тыс жерді басқанда жабылу
-    window.onclick = function(event) {
-      let modal = document.getElementById("dictionaryModal");
-      if (event.target == modal) {
-        modal.style.display = "none";
-      }
-    }
-  </script>
+  <h3>Qazaq Cinema Code Project</h3>
+  <p>Ғылыми жоба аясында әзірленген интерактивті платформа</p>
+  <p style="margin-top: 20px; opacity: 0.6;">© 2026 Ертай Алтынай, Нуралы Нурай | Барлық құқықтар қорғалған</p>
 </footer>
+
+<script>
+  // --- Navbar Scroll Effect ---
+  window.addEventListener('scroll', () => {
+    const header = document.getElementById('mainHeader');
+    if (window.scrollY > 50) {
+      header.classList.add('scrolled');
+    } else {
+      header.classList.remove('scrolled');
+    }
+  });
+
+  // --- AOS Logic (Simple Scroll reveal) ---
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add('active');
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('[data-aos]').forEach(el => observer.observe(el));
+
+  // --- Theme Toggle ---
+  function toggleTheme() {
+    document.body.classList.toggle('dark-theme');
+    const btn = document.getElementById('themeBtn');
+    btn.innerText = document.body.classList.contains('dark-theme') ? '☀️' : '🌙';
+  }
+
+  // --- Dictionary Logic ---
+  const dict = {
+    'hospitality': {
+      t: "Мәдени код: Қонақжайлылық",
+      d: "Қазақ комедияларындағы басты тақырып. 'Бизнес по-казахски' фильмінде қонақ күту — тек тамақ беру емес, рух пен намыс мәселесі ретінде көрсетіледі. Зерттеу көрсеткендей, бұл код көрерменге ұлттық мақтаныш сезімін ұялатады."
+    },
+    'kelin': {
+      t: "Мәдени код: Ибалық және Сәлем салу",
+      d: "'Келінжан' фильмінде келіннің сәлем салуы — ескішілдік емес, үлкенге деген құрметтің визуальды символы. Бұл мінез-құлық отбасының ішкі иерархиясы мен берекесін сақтайды."
+    },
+    'kuda': {
+      t: "Мәдени код: Құдалық этикеті",
+      d: "Құдалық — қазақ дипломатиясының мектебі. Фильмдерде 'Киіт кигізу', 'Төс қағыстыру' сияқты дәстүрлер арқылы екі рудың немесе екі отбасының мәдени жақындасуы юмормен сипатталады."
+    }
+  };
+
+  function openDict(key) {
+    document.getElementById('m-title').innerText = dict[key].t;
+    document.getElementById('m-desc').innerText = dict[key].d;
+    document.getElementById('smartModal').style.display = 'block';
+  }
+
+  function closeM() { document.getElementById('smartModal').style.display = 'none'; }
+
+  // --- Quiz Logic ---
+  function ans(correct) {
+    const f = document.getElementById('q-feedback');
+    f.innerText = correct ? "Дұрыс! Келінжан фильмінде сәлем салу - басты мәдени белгі. ✅" : "Қате, қайта ойланып көріңіз. ❌";
+    f.style.color = correct ? "#4caf50" : "#ff5252";
+  }
+
+  window.onclick = (e) => {
+    if (e.target == document.getElementById('smartModal')) closeM();
+  }
+</script>
 </body>
 </html>
