@@ -1,0 +1,93 @@
+:root {
+    --primary: #006064;
+    --secondary: #c4a006;
+    --light: #f4f7f6;
+    --dark: #1a1a1a;
+    --card-bg: #ffffff;
+    --header-bg: rgba(0, 96, 100, 0.9);
+}
+
+body.dark-theme {
+    --light: #121212;
+    --dark: #e0e0e0;
+    --card-bg: #1e1e1e;
+    --header-bg: rgba(18, 18, 18, 0.95);
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    margin: 0; padding: 0;
+    background-color: var(--light);
+    color: var(--dark);
+    line-height: 1.6;
+    scroll-behavior: smooth;
+}
+
+header {
+    position: fixed; top: 0; left: 0; right: 0;
+    padding: 15px 5%; display: flex;
+    justify-content: space-between; align-items: center;
+    z-index: 1000; transition: 0.4s;
+    background: var(--header-bg);
+    backdrop-filter: blur(10px);
+}
+
+.logo { font-size: 24px; font-weight: bold; color: white; text-decoration: none; font-family: 'Playfair Display', serif; }
+.logo span { color: var(--secondary); }
+
+nav ul { display: flex; list-style: none; gap: 20px; }
+nav ul li a { color: white; text-decoration: none; font-size: 14px; font-weight: 600; }
+
+.hero { height: 65vh; background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('../images/hero-bg.jpg') center/cover; display: flex; flex-direction: column; justify-content: center; align-items: center; color: white; text-align: center; }
+.hero h1 { font-size: 3rem; font-family: 'Playfair Display', serif; margin-bottom: 10px; }
+
+.container { width: 90%; max-width: 1050px; margin: auto; padding: 80px 0; }
+.section-title { text-align: center; font-size: 2.2rem; color: var(--primary); font-family: 'Playfair Display', serif; margin-bottom: 50px; }
+
+.content-text { background: var(--card-bg); padding: 35px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+
+/* Movie Cards */
+.movie-detail-card { display: flex; gap: 30px; background: var(--card-bg); border-radius: 25px; overflow: hidden; margin-bottom: 40px; box-shadow: 0 15px 35px rgba(0,0,0,0.1); }
+.movie-img-large { flex: 1; min-height: 350px; background-size: cover; background-position: center; }
+.movie-text { flex: 1.5; padding: 35px; }
+.tag { background: #e0f2f1; color: var(--primary); padding: 5px 15px; border-radius: 20px; font-size: 0.8rem; font-weight: bold; }
+
+/* Quotes Section */
+.quotes-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
+.quote-card { background: var(--primary); color: white; padding: 30px; border-radius: 20px; text-align: center; transition: 0.3s; }
+.quote-card:hover { transform: translateY(-10px); background: var(--secondary); }
+.quote-card p { font-size: 1.2rem; font-weight: bold; font-style: italic; margin-bottom: 10px; }
+.quote-card span { font-size: 0.8rem; opacity: 0.8; }
+
+/* Table */
+.code-table-container { overflow-x: auto; margin: 25px 0; }
+.code-table { width: 100%; border-collapse: collapse; background: var(--card-bg); border-radius: 15px; overflow: hidden; }
+.code-table th { background: var(--primary); color: white; padding: 15px; text-align: left; }
+.code-table td { padding: 15px; border-bottom: 1px solid #eee; }
+
+/* Glossary */
+.glossary-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 18px; }
+.glossary-card { background: var(--card-bg); padding: 20px; border-radius: 15px; border-left: 5px solid var(--secondary); cursor: pointer; transition: 0.3s; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+.glossary-card:hover { background: var(--primary); color: white; transform: scale(1.03); }
+.glossary-card h4 { margin: 0 0 8px 0; color: var(--primary); }
+.glossary-card:hover h4 { color: var(--secondary); }
+
+/* Stats & Quiz */
+.stats-wrapper { display: flex; align-items: center; gap: 40px; }
+.chart-container { flex: 1; height: 350px; background: white; border-radius: 20px; padding: 20px; }
+.stats-text { flex: 1; }
+
+.quiz-section { background: var(--primary); color: white; padding: 50px; border-radius: 30px; text-align: center; }
+.quiz-options { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 25px; }
+.quiz-btn { padding: 15px; border-radius: 12px; border: none; cursor: pointer; font-weight: bold; }
+
+.conclusion-box { border-top: 5px solid var(--secondary); }
+footer { background: #111; color: white; padding: 40px; text-align: center; }
+
+[data-aos] { opacity: 0; transform: translateY(20px); transition: 0.8s; }
+[data-aos].active { opacity: 1; transform: translateY(0); }
+
+@media (max-width: 768px) {
+    .movie-detail-card, .stats-wrapper { flex-direction: column; }
+    .hero h1 { font-size: 2.2rem; }
+}
