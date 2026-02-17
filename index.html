@@ -4,14 +4,22 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Qazaq Cinema Code | Зерттеу Жобасы</title>
+
+  <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+
+  <!-- Chart.js -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <!-- CSS -->
   <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
 
 <header id="mainHeader">
   <a href="#" class="logo">QazaqCinema<span>Code</span></a>
+
   <nav>
     <ul>
       <li><a href="#intro">Зерттеу</a></li>
@@ -19,30 +27,39 @@
       <li><a href="#glossary">Глоссарий</a></li>
       <li><a href="#analysis">Статистика</a></li>
     </ul>
-    <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn">🌙</button>
+
+    <button class="theme-toggle" id="themeBtn" onclick="toggleTheme()">🌙</button>
   </nav>
 </header>
 
 <section class="hero">
   <h1 data-aos>Ұлттық код және Кино</h1>
   <p data-aos>Комедиялық фильмдердегі қазақы мінез бен құндылықтардың көрінісі</p>
-  <button class="code-btn" style="width:auto; padding: 15px 40px;" onclick="document.getElementById('intro').scrollIntoView({behavior: 'smooth'})">Зерттеуді бастау</button>
+  <button class="code-btn"
+          style="width:auto; padding:15px 40px;"
+          onclick="document.getElementById('intro').scrollIntoView({behavior:'smooth'})">
+    Зерттеуді бастау
+  </button>
 </section>
 
 <div class="container">
 
+  <!-- INTRO -->
   <section id="intro">
     <h2 class="section-title" data-aos>Кіріспе және Өзектілік</h2>
     <div class="content-text" data-aos>
       <p>Қазіргі қоғамда кино өнері мәдени құндылықтарды сақтап қана қоймай, оларды жаңа буынға жеткізудің тиімді құралдарының біріне айналып отыр. Әсіресе комедиялық фильмдер көрерменге жеңіл әрі түсінікті формада әсер етіп, ұлттық мінез ерекшеліктерін юмор арқылы бейнелейді.</p>
-      <p>Тақырыптың өзектілігі жаһандану үдерісінің күшеюімен тігіз байланысты. Комедиялық фильмдердегі қазақы мінез бен ұлттық құндылықтардың бейнеленуі мәдени кодтың сақталуына ғана емес, оны заманауи тұрғыда қайта түсіндіруге мүмкіндік береді.</p>
+      <p>Тақырыптың өзектілігі жаһандану үдерісінің күшеюімен тікелей байланысты. Комедиялық фильмдердегі қазақы мінез бен ұлттық құндылықтардың бейнеленуі мәдени кодтың сақталуына ғана емес, оны заманауи тұрғыда қайта түсіндіруге мүмкіндік береді.</p>
     </div>
   </section>
 
+  <!-- CATALOG -->
   <h2 id="catalog" class="section-title" data-aos>Кино-Каталог және Мәдени талдау</h2>
+
   <div class="movie-list">
+
     <div class="movie-detail-card" data-aos>
-      <div class="movie-img-large" style="background-image: url('images/4.jpg');"></div>
+      <div class="movie-img-large" style="background-image:url('images/4.jpg');"></div>
       <div class="movie-text">
         <span class="tag">#ҚҰДАЛЫҚ #СЫЙЛАСТЫҚ</span>
         <h3>Күшік құда</h3>
@@ -52,44 +69,20 @@
     </div>
 
     <div class="movie-detail-card" data-aos>
-      <div class="movie-img-large" style="background-image: url('images/5.jpg');"></div>
+      <div class="movie-img-large" style="background-image:url('images/5.jpg');"></div>
       <div class="movie-text">
         <span class="tag">#КЕЛІН_ӘДЕБІ #ТӘРБИЕ</span>
         <h3>Келін особого назначения</h3>
-        <p><b>Фильм туралы:</b> Арнайы жасақта қызмет еткен қатал қыздың ауылға келін болып түсуі. Ол ауылдың күнделікті тіршілігіне әскери тәртіппен қарайды.</p>
-        <p><b>Мәдени код:</b> Бұл фильм «Келін мектебі» мен «Бейімделу» кодын ашады. Ауыл — қазақ рухының қайнар көзі ретінде суреттеледі.</p>
+        <p><b>Фильм туралы:</b> Арнайы жасақта қызмет еткен қатал қыздың ауылға келін болып түсуі.</p>
+        <p><b>Мәдени код:</b> «Келін мектебі» мен «Бейімделу» кодын ашады.</p>
       </div>
     </div>
 
-    <div class="movie-detail-card" data-aos>
-      <div class="movie-img-large" style="background-image: url('images/1.jpg');"></div>
-      <div class="movie-text">
-        <span class="tag">#ҚОНАҚЖАЙЛЫЛЫҚ</span>
-        <h3>Бизнес по-казахски</h3>
-        <p><b>Мәдени код:</b> Қонақжайлылық — қазақ болмысының басты тірегі. Қонақты күту тек дәстүр емес, абырой мен намыстың көрінісі.</p>
-      </div>
-    </div>
-
-    <div class="movie-detail-card" data-aos>
-      <div class="movie-img-large" style="background-image: url('images/2.jpg');"></div>
-      <div class="movie-text">
-        <span class="tag">#ИБАЛЫҚ #СӘЛЕМ_САЛУ</span>
-        <h3>Келінжан</h3>
-        <p><b>Мәдени код:</b> "Ибалық" және "Сәлем салу" дәстүрі орталық орында. Бұл — келіннің үлкендерге деген ізеті мен әдептілігінің символы.</p>
-      </div>
-    </div>
-
-    <div class="movie-detail-card" data-aos>
-      <div class="movie-img-large" style="background-image: url('images/3.jpg');"></div>
-      <div class="movie-text">
-        <span class="tag">#ҚҰДАЛЫҚ #ӨҢІРЛІК_ЕРЕКШЕЛІК</span>
-        <h3>Құдалар</h3>
-        <p><b>Мәдени код:</b> Өңірлік ерекшеліктер (Оңтүстік және Батыс) арасындағы қарым-қатынас пен сыйластық коды ашылады.</p>
-      </div>
-    </div>
   </div>
 
-  <h2 class="section-title" data-aos style="margin-top: 100px;">Мәдени кодтардың жіктелуі</h2>
+  <!-- TABLE -->
+  <h2 class="section-title" data-aos style="margin-top:100px;">Мәдени кодтардың жіктелуі</h2>
+
   <div class="code-table-container" data-aos>
     <table class="code-table">
       <thead>
@@ -119,24 +112,20 @@
     </table>
   </div>
 
-  <h2 id="quotes" class="section-title" data-aos style="margin-top: 100px;">🎬 Кино-цитаталар: Тілдік код</h2>
-  <div class="quotes-grid" data-aos>
-    <div class="quote-card"><p>"Қазақтың жаны — ауылда."</p><span>— Рухани құндылық</span></div>
-    <div class="quote-card"><p>"Құда — құдайдың екінші аты."</p><span>— Туыстық байланыс</span></div>
-    <div class="quote-card"><p>"Қонақ келсе — құт келеді."</p><span>— Қонақжайлылық</span></div>
-    <div class="quote-card"><p>"Салтты сақтаған — текті."</p><span>— Тәрбие негізі</span></div>
-  </div>
-
-  <h2 id="glossary" class="section-title" data-aos style="margin-top: 100px;">📖 Мәдени Глоссарий</h2>
-  <p style="text-align: center; margin-bottom: 30px;">Сөздің мағынасын білу үшін басыңыз (нашар дыбысталатындар өшірілді):</p>
+  <!-- GLOSSARY -->
+  <h2 id="glossary" class="section-title" data-aos style="margin-top:100px;">📖 Мәдени Глоссарий</h2>
+  <p style="text-align:center;margin-bottom:30px;">Сөздің мағынасын білу үшін басыңыз:</p>
   <div class="glossary-grid" id="glossaryGrid" data-aos></div>
 
-  <section id="analysis" style="margin-top: 100px;">
+  <!-- ANALYSIS -->
+  <section id="analysis" style="margin-top:100px;">
     <h2 class="section-title" data-aos>Зерттеу нәтижелері</h2>
     <div class="stats-wrapper" data-aos>
-      <div class="chart-container"><canvas id="surveyChart"></canvas></div>
+      <div class="chart-container">
+        <canvas id="surveyChart"></canvas>
+      </div>
       <div class="stats-text">
-        <p><b>Сауалнама нәтижесі:</b> 30 респонденттің 85%-ы комедиялар арқылы ұлттық кодты жақсырақ түсінетінін растады. Юмор — құндылықтарды жеткізудің ең тиімді құралы.</p>
+        <p><b>Сауалнама нәтижесі:</b> 30 респонденттің 85%-ы комедиялар арқылы ұлттық кодты жақсырақ түсінетінін растады.</p>
       </div>
     </div>
   </section>
@@ -147,6 +136,8 @@
   <p>© 2026 Ертай Алтынай, Нуралы Нурай | Қазақ тілі</p>
 </footer>
 
+<!-- JS -->
 <script src="js/script.js"></script>
+
 </body>
 </html>
