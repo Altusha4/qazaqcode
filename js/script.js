@@ -1,6 +1,6 @@
 /**
  * Qazaq Cinema Code
- * Полная версия с локальными аудио файлами
+ * Улучшенная версия: интерактивность, визуальные эффекты и оптимизация
  */
 
 const words = [
@@ -27,6 +27,7 @@ const words = [
 ];
 
 let currentAudio = null;
+let activeCard = null;
 
 /* ---------------- INIT ---------------- */
 
@@ -34,6 +35,7 @@ document.addEventListener("DOMContentLoaded", () => {
     initGlossary();
     initChart();
     setupAOS();
+    setupSmoothScroll();
 });
 
 /* ---------------- GLOSSARY ---------------- */
@@ -44,41 +46,52 @@ function initGlossary() {
 
     grid.innerHTML = "";
 
-    words.forEach(item => {
+    words.forEach((item, index) => {
         const card = document.createElement("div");
         card.className = "glossary-card";
+        // Добавляем атрибут задержки анимации для красивого появления по очереди
+        card.setAttribute("data-aos", "fade-up");
+        card.style.transitionDelay = `${index * 0.05}s`;
 
         card.innerHTML = `
             <h4>${item.w}</h4>
             <p>${item.d}</p>
-            <span style="font-size:0.75rem;opacity:0.6;display:block;margin-top:10px;">🔊 Тыңдау</span>
+            <div class="audio-indicator" style="font-size:0.7rem; margin-top:12px; opacity:0.6;">
+                <span>▶ Тыңдау</span>
+            </div>
         `;
 
-        card.addEventListener("click", () => playAudio(item.file));
-
+        card.addEventListener("click", () => playAudio(item.file, card));
         grid.appendChild(card);
     });
 }
 
 /* ---------------- AUDIO ---------------- */
 
-function playAudio(filename) {
-
+function playAudio(filename, cardElement) {
+    // Сброс предыдущего аудио и стилей
     if (currentAudio) {
         currentAudio.pause();
         currentAudio.currentTime = 0;
+        if (activeCard) activeCard.classList.remove("playing");
     }
 
     const audioPath = `audio/${filename}`;
     const audio = new Audio(audioPath);
 
-    audio.preload = "auto";
+    audio.play()
+        .then(() => {
+            cardElement.classList.add("playing");
+            activeCard = cardElement;
+            currentAudio = audio;
+        })
+        .catch(error => {
+            console.error("Аудио ойнату қатесі:", error);
+        });
 
-    audio.play().catch(error => {
-        console.error("Ошибка воспроизведения:", error);
-    });
-
-    currentAudio = audio;
+    audio.onended = () => {
+        cardElement.classList.remove("playing");
+    };
 }
 
 /* ---------------- CHART ---------------- */
@@ -88,6 +101,10 @@ function initChart() {
     if (!canvas) return;
 
     const ctx = canvas.getContext("2d");
+
+    // Настройка шрифтов для Chart.js
+    Chart.defaults.font.family = "'Montserrat', sans-serif";
+    Chart.defaults.color = getComputedStyle(document.body).getPropertyValue('--dark');
 
     new Chart(ctx, {
         type: "bar",
@@ -102,16 +119,25 @@ function initChart() {
                     "rgba(0, 77, 64, 0.7)"
                 ],
                 borderColor: ["#006064", "#c4a006", "#004d40"],
-                borderWidth: 2
+                borderWidth: 2,
+                borderRadius: 10, // Скругление столбиков
+                hoverBackgroundColor: "#006064"
             }]
         },
         options: {
             responsive: true,
             maintainAspectRatio: false,
+            plugins: {
+                legend: { display: false }
+            },
             scales: {
                 y: {
                     beginAtZero: true,
-                    max: 100
+                    max: 100,
+                    grid: { display: false }
+                },
+                x: {
+                    grid: { display: false }
                 }
             }
         }
@@ -123,12 +149,17 @@ function initChart() {
 function toggleTheme() {
     document.body.classList.toggle("dark-theme");
     const btn = document.getElementById("themeBtn");
+
     if (btn) {
-        btn.innerText = document.body.classList.contains("dark-theme") ? "☀️" : "🌙";
+        const isDark = document.body.classList.contains("dark-theme");
+        btn.innerText = isDark ? "☀️" : "🌙";
+
+        // Перерисовываем график при смене темы для обновления цветов текста (опционально)
+        initChart();
     }
 }
 
-/* ---------------- AOS ---------------- */
+/* ---------------- AOS (Scroll Animation) ---------------- */
 
 function setupAOS() {
     const observer = new IntersectionObserver((entries) => {
@@ -137,9 +168,35 @@ function setupAOS() {
                 entry.target.classList.add("active");
             }
         });
-    }, { threshold: 0.1 });
+    }, {
+        threshold: 0.1,
+        rootMargin: "0px 0px -50px 0px" // Срабатывает чуть раньше появления
+    });
 
     document.querySelectorAll("[data-aos]").forEach(el => observer.observe(el));
+}
+
+/* ---------------- SMOOTH SCROLL ---------------- */
+
+function setupSmoothScroll() {
+    document.querySelectorAll('nav a').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href');
+            const targetElement = document.querySelector(targetId);
+
+            if (targetElement) {
+                const headerOffset = 80;
+                const elementPosition = targetElement.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: "smooth"
+                });
+            }
+        });
+    });
 }
 
 /* ---------------- HEADER EFFECT ---------------- */
@@ -149,10 +206,11 @@ window.addEventListener("scroll", () => {
     if (!header) return;
 
     if (window.scrollY > 50) {
-        header.style.padding = "10px 5%";
-        header.style.boxShadow = "0 5px 20px rgba(0,0,0,0.1)";
+        header.style.padding = "12px 8%";
+        header.style.background = getComputedStyle(document.body).getPropertyValue('--header-bg');
+        header.style.boxShadow = "0 10px 30px rgba(0,0,0,0.15)";
     } else {
-        header.style.padding = "15px 5%";
+        header.style.padding = "20px 8%";
         header.style.boxShadow = "none";
     }
 });

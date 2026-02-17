@@ -5,13 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Qazaq Cinema Code | Зерттеу Жобасы</title>
 
-  <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
 
-  <!-- Chart.js -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-  <!-- CSS -->
   <link rel="stylesheet" href="css/style.css">
 </head>
 
@@ -33,99 +30,126 @@
 </header>
 
 <section class="hero">
-  <h1 data-aos>Ұлттық код және Кино</h1>
-  <p data-aos>Комедиялық фильмдердегі қазақы мінез бен құндылықтардың көрінісі</p>
-  <button class="code-btn"
-          style="width:auto; padding:15px 40px;"
-          onclick="document.getElementById('intro').scrollIntoView({behavior:'smooth'})">
-    Зерттеуді бастау
-  </button>
+  <div data-aos="fade-up">
+    <h1>Ұлттық код және Кино</h1>
+    <p>Заманауи комедиялар арқылы қазақы болмыс пен құндылықтарды зерттеу</p>
+    <button class="code-btn"
+            onclick="document.getElementById('intro').scrollIntoView({behavior:'smooth'})">
+      Зерттеуді бастау
+    </button>
+  </div>
 </section>
 
 <div class="container">
 
-  <!-- INTRO -->
   <section id="intro">
-    <h2 class="section-title" data-aos>Кіріспе және Өзектілік</h2>
-    <div class="content-text" data-aos>
-      <p>Қазіргі қоғамда кино өнері мәдени құндылықтарды сақтап қана қоймай, оларды жаңа буынға жеткізудің тиімді құралдарының біріне айналып отыр. Әсіресе комедиялық фильмдер көрерменге жеңіл әрі түсінікті формада әсер етіп, ұлттық мінез ерекшеліктерін юмор арқылы бейнелейді.</p>
-      <p>Тақырыптың өзектілігі жаһандану үдерісінің күшеюімен тікелей байланысты. Комедиялық фильмдердегі қазақы мінез бен ұлттық құндылықтардың бейнеленуі мәдени кодтың сақталуына ғана емес, оны заманауи тұрғыда қайта түсіндіруге мүмкіндік береді.</p>
+    <h2 class="section-title" data-aos="fade-up">Кіріспе және Өзектілік</h2>
+    <div class="content-text" data-aos="fade-up">
+      <p>Қазіргі қоғамда кино өнері мәдени құндылықтарды сақтап қана қоймай, оларды жаңа буынға жеткізудің тиімді құралына айналды. Комедиялық фильмдер ұлттық мінезді, әлеуметтік кодтарды және мәдени дәстүрлерді жеңіл әрі юмормен ұсынады.</p>
+      <p>Бұл жоба танымал қазақстандық туындылар мысалында "мәдени код" ұғымын талдауға арналған. Фильмдердегі әзіл арқылы біз өзіміздің салт-дәстүрімізді, туыстық қарым-қатынасымызды және ұлттық болмысымызды қайта танимыз.</p>
     </div>
   </section>
 
-  <!-- CATALOG -->
-  <h2 id="catalog" class="section-title" data-aos>Кино-Каталог және Мәдени талдау</h2>
+  <section id="catalog">
+    <h2 class="section-title" data-aos="fade-up" style="margin-top:100px;">Кино-Талдау</h2>
 
-  <div class="movie-list">
+    <div class="movie-list">
 
-    <div class="movie-detail-card" data-aos>
-      <div class="movie-img-large" style="background-image:url('images/4.jpg');"></div>
-      <div class="movie-text">
-        <span class="tag">#ҚҰДАЛЫҚ #СЫЙЛАСТЫҚ</span>
-        <h3>Күшік құда</h3>
-        <p><b>Фильм туралы:</b> Қалалық бай мен ауылдық қарапайым адамның құда болуы арқылы әлеуметтік таптардың қақтығысын көрсетеді.</p>
-        <p><b>Мәдени код:</b> "Құда — мың жылдық" принципі зерттеледі. Фильмде құдалар арасындағы этикет пен қазақы намыс ұғымы юмормен өрілген.</p>
+      <div class="movie-detail-card" data-aos="fade-right">
+        <div class="movie-img-large" style="background-image:url('images/1.jpg');"></div>
+        <div class="movie-text">
+          <span class="tag">#БИЗНЕС_ЖӘНЕ_МӘДЕНИЕТ</span>
+          <h3>Бизнес по-казахски в Корее</h3>
+          <p><b>Мәдени код:</b> "Ағайынның аты озғанша, ауылдастың тайы озсын". Фильмдегі басты мәселе — жат елдегі қазақы бірлік пен туыстық көмек (асар).</p>
+        </div>
       </div>
-    </div>
 
-    <div class="movie-detail-card" data-aos>
-      <div class="movie-img-large" style="background-image:url('images/5.jpg');"></div>
-      <div class="movie-text">
-        <span class="tag">#КЕЛІН_ӘДЕБІ #ТӘРБИЕ</span>
-        <h3>Келін особого назначения</h3>
-        <p><b>Фильм туралы:</b> Арнайы жасақта қызмет еткен қатал қыздың ауылға келін болып түсуі.</p>
-        <p><b>Мәдени код:</b> «Келін мектебі» мен «Бейімделу» кодын ашады.</p>
+      <div class="movie-detail-card" data-aos="fade-left">
+        <div class="movie-img-large" style="background-image:url('images/2.jpg');"></div>
+        <div class="movie-text">
+          <span class="tag">#ОТБАСЫ #ИЕРАРХИЯ</span>
+          <h3>Келінжан</h3>
+          <p><b>Мәдени код:</b> Қазақ отбасындағы келін мен ене арасындағы қатынас, үлкен әулеттің бірлігі мен ішкі тәртібі ("Үлкенге құрмет").</p>
+        </div>
       </div>
+
+      <div class="movie-detail-card" data-aos="fade-right">
+        <div class="movie-img-large" style="background-image:url('images/3.jpg');"></div>
+        <div class="movie-text">
+          <span class="tag">#ҚҰДАЛЫҚ #ЭТИКЕТ</span>
+          <h3>Құдалар</h3>
+          <p><b>Мәдени код:</b> "Құда — мың жылдық". Екі түрлі ортаның (қала мен ауыл) құндылықтар қақтығысы және ортақ тіл табу өнері.</p>
+        </div>
+      </div>
+
+      <div class="movie-detail-card" data-aos="fade-left">
+        <div class="movie-img-large" style="background-image:url('images/4.jpg');"></div>
+        <div class="movie-text">
+          <span class="tag">#САТУС #НАМЫС</span>
+          <h3>Күшік құда</h3>
+          <p><b>Мәдени код:</b> Әлеуметтік мәртебе мен ерлер арасындағы намыс коды. Құдалық этикетінің заманауи комедиялық интерпретациясы.</p>
+        </div>
+      </div>
+
+      <div class="movie-detail-card" data-aos="fade-right">
+        <div class="movie-img-large" style="background-image:url('images/5.jpg');"></div>
+        <div class="movie-text">
+          <span class="tag">#БЕЙІМДЕЛУ #ДӘСТҮР</span>
+          <h3>Келін особого назначения</h3>
+          <p><b>Мәдени код:</b> "Ибалық" пен "Сәлем салу". Қазіргі заманғы қыздың дәстүрлі ауыл өміріне бейімделуі және мәдени құндылықтарды қабылдауы.</p>
+        </div>
+      </div>
+
     </div>
+  </section>
 
-  </div>
+  <section id="table-section">
+    <h2 class="section-title" data-aos="fade-up" style="margin-top:100px;">Мәдени кодтардың жіктелуі</h2>
+    <div class="code-table-container" data-aos="fade-up">
+      <table class="code-table">
+        <thead>
+        <tr>
+          <th>Құндылық түрі</th>
+          <th>Кинодағы көрінісі</th>
+          <th>Мәдени мағынасы</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td><b>Әлеуметтік код</b></td>
+          <td>Құдалық, киіт беру, той</td>
+          <td>Әулет арасындағы байланысты бекіту</td>
+        </tr>
+        <tr>
+          <td><b>Мінез-құлық коды</b></td>
+          <td>Ибалық, сәлем салу, бата</td>
+          <td>Үлкенге құрмет және ізеттілік</td>
+        </tr>
+        <tr>
+          <td><b>Тұрмыстық код</b></td>
+          <td>Қонақасы, төрге шығару</td>
+          <td>Қонақжайлылық пен жомарттық</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
 
-  <!-- TABLE -->
-  <h2 class="section-title" data-aos style="margin-top:100px;">Мәдени кодтардың жіктелуі</h2>
+  <section id="glossary">
+    <h2 class="section-title" data-aos="fade-up" style="margin-top:100px;">📖 Мәдени Глоссарий</h2>
+    <p style="text-align:center;margin-bottom:30px;" data-aos="fade-up">Сөздің мағынасын білу үшін басыңыз:</p>
+    <div class="glossary-grid" id="glossaryGrid"></div>
+  </section>
 
-  <div class="code-table-container" data-aos>
-    <table class="code-table">
-      <thead>
-      <tr>
-        <th>Құндылық түрі</th>
-        <th>Кинодағы көрінісі</th>
-        <th>Мәдени мағынасы</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr>
-        <td><b>Әлеуметтік код</b></td>
-        <td>Құдалық, киіт беру, той</td>
-        <td>Әулет арасындағы байланысты бекіту</td>
-      </tr>
-      <tr>
-        <td><b>Мінез-құлық коды</b></td>
-        <td>Ибалық, сәлем салу, бата</td>
-        <td>Үлкенге құрмет және ізеттілік</td>
-      </tr>
-      <tr>
-        <td><b>Тұрмыстық код</b></td>
-        <td>Қонақасы, төрге шығару</td>
-        <td>Қонақжайлылық пен жомарттық</td>
-      </tr>
-      </tbody>
-    </table>
-  </div>
-
-  <!-- GLOSSARY -->
-  <h2 id="glossary" class="section-title" data-aos style="margin-top:100px;">📖 Мәдени Глоссарий</h2>
-  <p style="text-align:center;margin-bottom:30px;">Сөздің мағынасын білу үшін басыңыз:</p>
-  <div class="glossary-grid" id="glossaryGrid" data-aos></div>
-
-  <!-- ANALYSIS -->
   <section id="analysis" style="margin-top:100px;">
-    <h2 class="section-title" data-aos>Зерттеу нәтижелері</h2>
-    <div class="stats-wrapper" data-aos>
+    <h2 class="section-title" data-aos="fade-up">Зерттеу нәтижелері</h2>
+    <div class="stats-wrapper" data-aos="fade-up">
       <div class="chart-container">
         <canvas id="surveyChart"></canvas>
       </div>
       <div class="stats-text">
-        <p><b>Сауалнама нәтижесі:</b> 30 респонденттің 92%-ы комедиялар арқылы ұлттық кодты жақсырақ түсінетінін растады.</p>
+        <p><b>Сауалнама нәтижесі:</b> Респонденттердің 92%-ы комедиялық фильмдер ұлттық дәстүрлерді түсінуге көмектеседі деп есептейді.</p>
+        <p>Кино — жастарға ұлттық кодты жеткізудің ең тиімді жолы.</p>
       </div>
     </div>
   </section>
@@ -133,10 +157,9 @@
 </div>
 
 <footer>
-  <p>© 2026 Ертай Алтынай, Нуралы Нурай | Қазақ тілі</p>
+  <p>© 2026 Ертай Алтынай, Нуралы Нурай | Қазақ тілі мен әдебиеті</p>
 </footer>
 
-<!-- JS -->
 <script src="js/script.js"></script>
 
 </body>
