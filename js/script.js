@@ -1,6 +1,6 @@
 /**
  * Qazaq Cinema Code
- * Финальная стабильная версия с локальными аудио файлами
+ * Полная версия с локальными аудио файлами
  */
 
 const words = [
@@ -28,13 +28,15 @@ const words = [
 
 let currentAudio = null;
 
+/* ---------------- INIT ---------------- */
+
 document.addEventListener("DOMContentLoaded", () => {
     initGlossary();
     initChart();
     setupAOS();
 });
 
-/* ---------- Глоссарий ---------- */
+/* ---------------- GLOSSARY ---------------- */
 
 function initGlossary() {
     const grid = document.getElementById("glossaryGrid");
@@ -58,21 +60,28 @@ function initGlossary() {
     });
 }
 
-/* ---------- Воспроизведение аудио ---------- */
+/* ---------------- AUDIO ---------------- */
 
 function playAudio(filename) {
+
     if (currentAudio) {
         currentAudio.pause();
         currentAudio.currentTime = 0;
     }
 
-    currentAudio = new Audio(`audio/${filename}`);
-    currentAudio.play().catch(err => {
-        console.error("Ошибка воспроизведения:", err);
+    const audioPath = `audio/${filename}`;
+    const audio = new Audio(audioPath);
+
+    audio.preload = "auto";
+
+    audio.play().catch(error => {
+        console.error("Ошибка воспроизведения:", error);
     });
+
+    currentAudio = audio;
 }
 
-/* ---------- Chart ---------- */
+/* ---------------- CHART ---------------- */
 
 function initChart() {
     const canvas = document.getElementById("surveyChart");
@@ -109,7 +118,7 @@ function initChart() {
     });
 }
 
-/* ---------- Переключение темы ---------- */
+/* ---------------- THEME ---------------- */
 
 function toggleTheme() {
     document.body.classList.toggle("dark-theme");
@@ -119,7 +128,7 @@ function toggleTheme() {
     }
 }
 
-/* ---------- Анимация ---------- */
+/* ---------------- AOS ---------------- */
 
 function setupAOS() {
     const observer = new IntersectionObserver((entries) => {
@@ -133,7 +142,7 @@ function setupAOS() {
     document.querySelectorAll("[data-aos]").forEach(el => observer.observe(el));
 }
 
-/* ---------- Эффекты шапки ---------- */
+/* ---------------- HEADER EFFECT ---------------- */
 
 window.addEventListener("scroll", () => {
     const header = document.getElementById("mainHeader");
