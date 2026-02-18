@@ -39,6 +39,12 @@
     </button>
   </div>
 </section>
+<div id="loader-wrapper">
+    <div class="loader-content">
+        <div class="loader-circle"></div>
+        <h2 class="loader-text">Qazaq Cinema Code</h2>
+    </div>
+</div>
 
 <div class="container">
 
@@ -61,6 +67,7 @@
           <span class="tag">#БИЗНЕС_ЖӘНЕ_МӘДЕНИЕТ</span>
           <h3>Бизнес по-казахски в Корее</h3>
           <p><b>Мәдени код:</b> "Ағайынның аты озғанша, ауылдастың тайы озсын". Фильмдегі басты мәселе — жат елдегі қазақы бірлік пен туыстық көмек (асар).</p>
+          <button class="play-trailer-btn" data-video="WkbQnCIwts8">Трейлер</button>
         </div>
       </div>
 
@@ -70,6 +77,7 @@
           <span class="tag">#ОТБАСЫ #ИЕРАРХИЯ</span>
           <h3>Келінжан</h3>
           <p><b>Мәдени код:</b> Қазақ отбасындағы келін мен ене арасындағы қатынас, үлкен әулеттің бірлігі мен ішкі тәртібі ("Үлкенге құрмет").</p>
+          <button class="play-trailer-btn" data-video="G35V1r4hj9Y">Трейлер</button>
         </div>
       </div>
 
@@ -79,6 +87,7 @@
           <span class="tag">#ҚҰДАЛЫҚ #ЭТИКЕТ</span>
           <h3>Құдалар</h3>
           <p><b>Мәдени код:</b> "Құда — мың жылдық". Екі түрлі ортаның (қала мен ауыл) құндылықтар қақтығысы және ортақ тіл табу өнері.</p>
+          <button class="play-trailer-btn" data-video="WXUt_ikdJ_M">Трейлер</button>
         </div>
       </div>
 
@@ -88,6 +97,7 @@
           <span class="tag">#САТУС #НАМЫС</span>
           <h3>Күшік құда</h3>
           <p><b>Мәдени код:</b> Әлеуметтік мәртебе мен ерлер арасындағы намыс коды. Құдалық этикетінің заманауи комедиялық интерпретациясы.</p>
+          <button class="play-trailer-btn" data-video="-SJlyPQawdM">Трейлер</button>
         </div>
       </div>
 
@@ -97,6 +107,7 @@
           <span class="tag">#БЕЙІМДЕЛУ #ДӘСТҮР</span>
           <h3>Келін особого назначения</h3>
           <p><b>Мәдени код:</b> "Ибалық" пен "Сәлем салу". Қазіргі заманғы қыздың дәстүрлі ауыл өміріне бейімделуі және мәдени құндылықтарды қабылдауы.</p>
+          <button class="play-trailer-btn" data-video="0arwq1SorVU">Трейлер</button>
         </div>
       </div>
 
@@ -155,9 +166,17 @@
   </section>
 
 </div>
+<div id="videoModal" class="video-modal">
+    <div class="modal-content">
+        <span class="close-modal">&times;</span>
+        <div class="video-container">
+            <iframe id="trailerPlayer" src="" frameborder="0" allowfullscreen allow="autoplay"></iframe>
+        </div>
+    </div>
+</div>
 
 <footer>
-  <p>© 2026 Ертай Алтынай, Нуралы Нурай | Қазақ тілі мен әдебиеті</p>
+  <p>© 2026 Ертай Алтынай, Нұралы Нұрай | Қазақ тілі мен әдебиеті</p>
 </footer>
 
 <script src="js/script.js"></script>

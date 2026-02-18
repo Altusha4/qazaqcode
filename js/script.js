@@ -198,6 +198,36 @@ function setupSmoothScroll() {
         });
     });
 }
+// Логика для трейлеров
+document.addEventListener("DOMContentLoaded", () => {
+    const modal = document.getElementById("videoModal");
+    const iframe = document.getElementById("trailerPlayer");
+    const closeBtn = document.querySelector(".close-modal");
+    const buttons = document.querySelectorAll(".play-trailer-btn");
+
+    buttons.forEach(btn => {
+        btn.addEventListener("click", () => {
+            const videoId = btn.getAttribute("data-video");
+            // Формируем ссылку с автовоспроизведением
+            iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
+            modal.style.display = "flex";
+        });
+    });
+
+    // Закрытие при клике на крестик
+    closeBtn.onclick = () => {
+        modal.style.display = "none";
+        iframe.src = ""; // Очищаем ссылку, чтобы остановить звук
+    };
+
+    // Закрытие при клике вне окна
+    window.onclick = (event) => {
+        if (event.target == modal) {
+            modal.style.display = "none";
+            iframe.src = "";
+        }
+    };
+});
 
 /* ---------------- HEADER EFFECT ---------------- */
 
@@ -214,3 +244,54 @@ window.addEventListener("scroll", () => {
         header.style.boxShadow = "none";
     }
 });
+// Сайт жүктелгенде Loader-ді өшіру
+window.addEventListener("load", () => {
+    const loader = document.getElementById("loader-wrapper");
+    setTimeout(() => {
+        loader.classList.add("loader-hidden");
+    }, 1500); // 1.5 секунд көрсетіледі
+});
+
+// Басты тақырыпқа тышқан қозғалысымен параллакс қосу
+document.querySelector(".hero").addEventListener("mousemove", (e) => {
+    const title = document.querySelector(".hero h1");
+    const moveX = (e.clientX - window.innerWidth / 2) * 0.03;
+    const moveY = (e.clientY - window.innerHeight / 2) * 0.03;
+    title.style.transform = `translate(${moveX}px, ${moveY}px)`;
+});
+// Фонда қалқып жүретін элементтер жасау
+function createFloatingIcons() {
+    const container = document.body;
+    const icons = ['🎬', '🎥', '🍿', '🇰🇿', '✨'];
+    
+    for (let i = 0; i < 15; i++) {
+        const icon = document.createElement('div');
+        icon.innerText = icons[Math.floor(Math.random() * icons.length)];
+        icon.className = 'floating-icon';
+        icon.style.left = Math.random() * 100 + 'vw';
+        icon.style.top = Math.random() * 100 + 'vh';
+        icon.style.fontSize = (Math.random() * 20 + 10) + 'px';
+        icon.style.opacity = '0.1';
+        icon.style.position = 'fixed';
+        icon.style.pointerEvents = 'none';
+        icon.style.zIndex = '-1';
+        container.appendChild(icon);
+        
+        // Анимация
+        animateIcon(icon);
+    }
+}
+
+function animateIcon(el) {
+    let x = Math.random() * 2 - 1;
+    let y = Math.random() * 2 - 1;
+    
+    setInterval(() => {
+        const rect = el.getBoundingClientRect();
+        el.style.transform = `translate(${x}px, ${y}px)`;
+        x += Math.random() * 2 - 1;
+        y += Math.random() * 2 - 1;
+    }, 100);
+}
+
+createFloatingIcons();

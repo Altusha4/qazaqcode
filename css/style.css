@@ -418,3 +418,110 @@ footer p { margin: 5px 0; }
     nav ul { display: none; } /* Можно добавить мобильное меню позже */
     .container { padding: 60px 0; }
 }
+/* Кнопка "Трейлер" в стиле твоего проекта */
+.play-trailer-btn {
+    margin-top: 15px;
+    padding: 10px 25px;
+    background-color: var(--secondary); /* Твой золотистый цвет */
+    color: var(--dark);
+    border: none;
+    border-radius: 50px; /* Округлая кнопка */
+    font-weight: 600;
+    font-family: 'Montserrat', sans-serif;
+    cursor: pointer;
+    transition: var(--transition);
+    box-shadow: var(--shadow);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.play-trailer-btn:hover {
+    background-color: var(--accent); /* Светло-желтый при наведении */
+    transform: translateY(-3px);
+    box-shadow: 0 15px 35px rgba(196, 160, 6, 0.3);
+}
+
+/* Иконка "Play" перед текстом (опционально) */
+.play-trailer-btn::before {
+    content: '▶';
+    font-size: 0.8rem;
+}
+
+/* Модальное окно */
+.video-modal {
+    display: none; 
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.9);
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content {
+    position: relative;
+    width: 80%;
+    max-width: 800px;
+}
+
+.close-modal {
+    position: absolute;
+    top: -40px;
+    right: 0;
+    color: white;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* Соотношение сторон 16:9 */
+.video-container {
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+}
+
+.video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+#loader-wrapper {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: #1a1a1a;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+    transition: opacity 0.8s ease, visibility 0.8s;
+}
+
+.loader-circle {
+    width: 80px; height: 80px;
+    border: 4px solid var(--secondary);
+    border-top: 4px solid transparent;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 20px;
+}
+
+.loader-text {
+    color: var(--light);
+    font-family: 'Montserrat', sans-serif;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+
+.loader-hidden { opacity: 0; visibility: hidden; }
