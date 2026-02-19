@@ -1,6 +1,6 @@
 /**
  * Qazaq Cinema Code
- * Улучшенная версия: интерактивность, визуальные эффекты и оптимизация
+ * Толық жаңартылған нұсқа: 5 график, аудио, трейлерлер және эффектілер
  */
 
 const words = [
@@ -36,6 +36,8 @@ document.addEventListener("DOMContentLoaded", () => {
     initChart();
     setupAOS();
     setupSmoothScroll();
+    setupVideoModal();
+    createFloatingIcons();
 });
 
 /* ---------------- GLOSSARY ---------------- */
@@ -49,7 +51,6 @@ function initGlossary() {
     words.forEach((item, index) => {
         const card = document.createElement("div");
         card.className = "glossary-card";
-        // Добавляем атрибут задержки анимации для красивого появления по очереди
         card.setAttribute("data-aos", "fade-up");
         card.style.transitionDelay = `${index * 0.05}s`;
 
@@ -69,7 +70,6 @@ function initGlossary() {
 /* ---------------- AUDIO ---------------- */
 
 function playAudio(filename, cardElement) {
-    // Сброс предыдущего аудио и стилей
     if (currentAudio) {
         currentAudio.pause();
         currentAudio.currentTime = 0;
@@ -94,54 +94,123 @@ function playAudio(filename, cardElement) {
     };
 }
 
-/* ---------------- CHART ---------------- */
+/* ---------------- CHARTS (5 ГРАФИКОВ) ---------------- */
 
 function initChart() {
-    const canvas = document.getElementById("surveyChart");
-    if (!canvas) return;
-
-    const ctx = canvas.getContext("2d");
-
-    // Настройка шрифтов для Chart.js
+    // Шрифтер мен түстерді теңшеу
     Chart.defaults.font.family = "'Montserrat', sans-serif";
-    Chart.defaults.color = getComputedStyle(document.body).getPropertyValue('--dark');
+    const isDark = document.body.classList.contains("dark-theme");
+    const textColor = isDark ? "#f1f5f9" : "#1a1a1a";
 
-    new Chart(ctx, {
-        type: "bar",
-        data: {
-            labels: ["Ұлттық код", "Юмор", "Отбасы"],
-            datasets: [{
-                label: "Маңыздылық (%)",
-                data: [85, 92, 78],
-                backgroundColor: [
-                    "rgba(0, 96, 100, 0.7)",
-                    "rgba(196, 160, 6, 0.7)",
-                    "rgba(0, 77, 64, 0.7)"
-                ],
-                borderColor: ["#006064", "#c4a006", "#004d40"],
-                borderWidth: 2,
-                borderRadius: 10, // Скругление столбиков
-                hoverBackgroundColor: "#006064"
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-                legend: { display: false }
-            },
-            scales: {
-                y: {
-                    beginAtZero: true,
-                    max: 100,
-                    grid: { display: false }
-                },
-                x: {
-                    grid: { display: false }
-                }
+    const commonOptions = {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            legend: {
+                labels: { color: textColor, font: { size: 12 } }
             }
         }
-    });
+    };
+
+    // 1. Кино жанрларына басымдық (Вопрос №2)
+    const genreCtx = document.getElementById('genreChart');
+    if (genreCtx) {
+        new Chart(genreCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Комедия', 'Басқалар'],
+                datasets: [{
+                    data: [86.7, 13.3],
+                    backgroundColor: ['#c4a006', '#006064'],
+                    borderWidth: 0
+                }]
+            },
+            options: commonOptions
+        });
+    }
+
+    // 2. Мәдени кодты түсінуге әсері (Вопрос №6)
+    const impactCtx = document.getElementById('impactChart');
+    if (impactCtx) {
+        new Chart(impactCtx, {
+            type: 'pie',
+            data: {
+                labels: ['Түсінуге көмектеседі', 'Әсері аз'],
+                datasets: [{
+                    data: [92, 8],
+                    backgroundColor: ['#006064', '#cfd8dc'],
+                    borderWidth: 0
+                }]
+            },
+            options: commonOptions
+        });
+    }
+
+    // 3. Жиі байқалатын элементтер (Вопрос №8, 9, 7)
+    const codesCtx = document.getElementById('codesChart');
+    if (codesCtx) {
+        new Chart(codesCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Қонақжайлық', 'Тіл/Әзіл', 'Салт-дәстүр'],
+                datasets: [{
+                    label: 'Байқалу жиілігі (%)',
+                    data: [90, 70, 76.7],
+                    backgroundColor: '#006064',
+                    borderRadius: 8
+                }]
+            },
+            options: {
+                ...commonOptions,
+                plugins: { legend: { display: false } },
+                scales: {
+                    y: { beginAtZero: true, max: 100, ticks: { color: textColor } },
+                    x: { ticks: { color: textColor } }
+                }
+            }
+        });
+    }
+
+    // 4. Құндылықтарды сақтауға үлесі (Вопрос №11)
+    const valuesCtx = document.getElementById('valuesChart');
+    if (valuesCtx) {
+        new Chart(valuesCtx, {
+            type: 'pie',
+            data: {
+                labels: ['Үлес қосады', 'Күмәнді'],
+                datasets: [{
+                    data: [56.7, 43.3],
+                    backgroundColor: ['#004d40', '#cfd8dc'],
+                    borderWidth: 0
+                }]
+            },
+            options: commonOptions
+        });
+    }
+
+    // 5. Дәстүрлерді көбірек көрсету қажеттілігі (Вопрос №7)
+    const futureCtx = document.getElementById('futureChart');
+    if (futureCtx) {
+        new Chart(futureCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Көбірек қажет', 'Жеткілікті'],
+                datasets: [{
+                    data: [76.7, 23.3],
+                    backgroundColor: '#c4a006',
+                    borderRadius: 8
+                }]
+            },
+            options: {
+                ...commonOptions,
+                plugins: { legend: { display: false } },
+                scales: {
+                    y: { beginAtZero: true, max: 100, ticks: { color: textColor } },
+                    x: { ticks: { color: textColor } }
+                }
+            }
+        });
+    }
 }
 
 /* ---------------- THEME ---------------- */
@@ -153,53 +222,13 @@ function toggleTheme() {
     if (btn) {
         const isDark = document.body.classList.contains("dark-theme");
         btn.innerText = isDark ? "☀️" : "🌙";
-
-        // Перерисовываем график при смене темы для обновления цветов текста (опционально)
-        initChart();
+        initChart(); // Түстерді жаңарту үшін графиктерді қайта салу
     }
 }
 
-/* ---------------- AOS (Scroll Animation) ---------------- */
+/* ---------------- VIDEO MODAL ---------------- */
 
-function setupAOS() {
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add("active");
-            }
-        });
-    }, {
-        threshold: 0.1,
-        rootMargin: "0px 0px -50px 0px" // Срабатывает чуть раньше появления
-    });
-
-    document.querySelectorAll("[data-aos]").forEach(el => observer.observe(el));
-}
-
-/* ---------------- SMOOTH SCROLL ---------------- */
-
-function setupSmoothScroll() {
-    document.querySelectorAll('nav a').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
-            e.preventDefault();
-            const targetId = this.getAttribute('href');
-            const targetElement = document.querySelector(targetId);
-
-            if (targetElement) {
-                const headerOffset = 80;
-                const elementPosition = targetElement.getBoundingClientRect().top;
-                const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-
-                window.scrollTo({
-                    top: offsetPosition,
-                    behavior: "smooth"
-                });
-            }
-        });
-    });
-}
-// Логика для трейлеров
-document.addEventListener("DOMContentLoaded", () => {
+function setupVideoModal() {
     const modal = document.getElementById("videoModal");
     const iframe = document.getElementById("trailerPlayer");
     const closeBtn = document.querySelector(".close-modal");
@@ -208,33 +237,100 @@ document.addEventListener("DOMContentLoaded", () => {
     buttons.forEach(btn => {
         btn.addEventListener("click", () => {
             const videoId = btn.getAttribute("data-video");
-            // Формируем ссылку с автовоспроизведением
             iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
             modal.style.display = "flex";
         });
     });
 
-    // Закрытие при клике на крестик
-    closeBtn.onclick = () => {
-        modal.style.display = "none";
-        iframe.src = ""; // Очищаем ссылку, чтобы остановить звук
-    };
+    if (closeBtn) {
+        closeBtn.onclick = () => {
+            modal.style.display = "none";
+            iframe.src = "";
+        };
+    }
 
-    // Закрытие при клике вне окна
     window.onclick = (event) => {
         if (event.target == modal) {
             modal.style.display = "none";
             iframe.src = "";
         }
     };
+}
+
+/* ---------------- UTILS ---------------- */
+
+function setupAOS() {
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) entry.target.classList.add('active');
+        });
+    }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
+
+    document.querySelectorAll("[data-aos]").forEach(el => observer.observe(el));
+}
+
+function setupSmoothScroll() {
+    document.querySelectorAll('nav a').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                const headerOffset = 80;
+                const elementPosition = target.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+                window.scrollTo({ top: offsetPosition, behavior: "smooth" });
+            }
+        });
+    });
+}
+
+window.addEventListener("load", () => {
+    const loader = document.getElementById("loader-wrapper");
+    if (loader) {
+        setTimeout(() => { loader.classList.add("loader-hidden"); }, 1000);
+    }
 });
 
-/* ---------------- HEADER EFFECT ---------------- */
+/* ---------------- EFFECTS ---------------- */
+
+document.querySelector(".hero").addEventListener("mousemove", (e) => {
+    const title = document.querySelector(".hero h1");
+    if (!title) return;
+    const moveX = (e.clientX - window.innerWidth / 2) * 0.02;
+    const moveY = (e.clientY - window.innerHeight / 2) * 0.02;
+    title.style.transform = `translate(${moveX}px, ${moveY}px)`;
+});
+
+function createFloatingIcons() {
+    const container = document.body;
+    const icons = ['🎬', '🎥', '🍿', '🇰🇿', '✨'];
+    for (let i = 0; i < 15; i++) {
+        const icon = document.createElement('div');
+        icon.innerText = icons[Math.floor(Math.random() * icons.length)];
+        icon.className = 'floating-icon';
+        icon.style.cssText = `
+            left: ${Math.random() * 100}vw; top: ${Math.random() * 100}vh;
+            font-size: ${Math.random() * 20 + 10}px; opacity: 0.1;
+            position: fixed; pointer-events: none; z-index: -1;
+        `;
+        container.appendChild(icon);
+        animateIcon(icon);
+    }
+}
+
+function animateIcon(el) {
+    let x = Math.random() * 2 - 1;
+    let y = Math.random() * 2 - 1;
+    setInterval(() => {
+        el.style.transform = `translate(${x}px, ${y}px)`;
+        x += (Math.random() - 0.5) * 2;
+        y += (Math.random() - 0.5) * 2;
+    }, 100);
+}
 
 window.addEventListener("scroll", () => {
     const header = document.getElementById("mainHeader");
     if (!header) return;
-
     if (window.scrollY > 50) {
         header.style.padding = "12px 8%";
         header.style.background = getComputedStyle(document.body).getPropertyValue('--header-bg');
@@ -244,54 +340,3 @@ window.addEventListener("scroll", () => {
         header.style.boxShadow = "none";
     }
 });
-// Сайт жүктелгенде Loader-ді өшіру
-window.addEventListener("load", () => {
-    const loader = document.getElementById("loader-wrapper");
-    setTimeout(() => {
-        loader.classList.add("loader-hidden");
-    }, 1500); // 1.5 секунд көрсетіледі
-});
-
-// Басты тақырыпқа тышқан қозғалысымен параллакс қосу
-document.querySelector(".hero").addEventListener("mousemove", (e) => {
-    const title = document.querySelector(".hero h1");
-    const moveX = (e.clientX - window.innerWidth / 2) * 0.03;
-    const moveY = (e.clientY - window.innerHeight / 2) * 0.03;
-    title.style.transform = `translate(${moveX}px, ${moveY}px)`;
-});
-// Фонда қалқып жүретін элементтер жасау
-function createFloatingIcons() {
-    const container = document.body;
-    const icons = ['🎬', '🎥', '🍿', '🇰🇿', '✨'];
-    
-    for (let i = 0; i < 15; i++) {
-        const icon = document.createElement('div');
-        icon.innerText = icons[Math.floor(Math.random() * icons.length)];
-        icon.className = 'floating-icon';
-        icon.style.left = Math.random() * 100 + 'vw';
-        icon.style.top = Math.random() * 100 + 'vh';
-        icon.style.fontSize = (Math.random() * 20 + 10) + 'px';
-        icon.style.opacity = '0.1';
-        icon.style.position = 'fixed';
-        icon.style.pointerEvents = 'none';
-        icon.style.zIndex = '-1';
-        container.appendChild(icon);
-        
-        // Анимация
-        animateIcon(icon);
-    }
-}
-
-function animateIcon(el) {
-    let x = Math.random() * 2 - 1;
-    let y = Math.random() * 2 - 1;
-    
-    setInterval(() => {
-        const rect = el.getBoundingClientRect();
-        el.style.transform = `translate(${x}px, ${y}px)`;
-        x += Math.random() * 2 - 1;
-        y += Math.random() * 2 - 1;
-    }, 100);
-}
-
-createFloatingIcons();

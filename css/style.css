@@ -525,3 +525,100 @@ footer p { margin: 5px 0; }
 @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
 
 .loader-hidden { opacity: 0; visibility: hidden; }
+
+/* --- ЖАҢАРТЫЛҒАН СТАТИСТИКА БӨЛІМІ (ОБНОВЛЕННАЯ СТАТИСТИКА) --- */
+
+/* Сетка для графиков: 3 в ряд на десктопе, 2 или 1 на планшетах/телефонах */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+    margin-top: 40px;
+}
+
+/* Карточка для каждого графика */
+.stats-card {
+    background: var(--card-bg);
+    padding: 25px;
+    border-radius: 25px;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+    border: 1px solid rgba(0, 96, 100, 0.05);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.stats-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+}
+
+/* Заголовки внутри карточек с графиками */
+.stats-card h3 {
+    font-size: 1rem;
+    color: var(--primary);
+    margin-bottom: 20px;
+    text-align: center;
+    font-family: 'Montserrat', sans-serif;
+    min-height: 40px; /* Чтобы заголовки разной длины не смещали графики */
+    display: flex;
+    align-items: center;
+}
+
+/* Контейнер для самого Canvas (Chart.js) */
+.chart-container {
+    position: relative;
+    height: 280px; /* Оптимальная высота для небольших графиков */
+    width: 100%;
+}
+
+/* Финальный блок с текстовым выводом */
+.stats-summary {
+    max-width: 900px;
+    margin: 50px auto 0;
+}
+
+.stats-summary .content-text {
+    border-left: 5px solid var(--secondary);
+    background: var(--card-bg);
+    padding: 30px 40px;
+}
+
+.stats-summary p {
+    font-size: 1.1rem;
+    color: var(--dark);
+    margin: 0;
+}
+
+.stats-summary b {
+    color: var(--primary);
+}
+
+/* Адаптивность для мобильных устройств */
+@media (max-width: 768px) {
+    .stats-grid {
+        grid-template-columns: 1fr; /* На телефонах графики идут друг за другом */
+    }
+
+    .stats-card {
+        padding: 20px;
+    }
+
+    .chart-container {
+        height: 250px;
+    }
+}
+
+/* Анимация пульсации для итоговой цифры (опционально) */
+@keyframes highlight {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+.stats-summary b {
+    display: inline-block;
+    color: var(--secondary);
+    animation: highlight 2s infinite ease-in-out;
+}

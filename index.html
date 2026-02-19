@@ -6,9 +6,7 @@
   <title>Qazaq Cinema Code | Зерттеу Жобасы</title>
 
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
-
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
   <link rel="stylesheet" href="css/style.css">
 </head>
 
@@ -16,7 +14,6 @@
 
 <header id="mainHeader">
   <a href="#" class="logo">QazaqCinema<span>Code</span></a>
-
   <nav>
     <ul>
       <li><a href="#intro">Зерттеу</a></li>
@@ -24,10 +21,16 @@
       <li><a href="#glossary">Глоссарий</a></li>
       <li><a href="#analysis">Статистика</a></li>
     </ul>
-
     <button class="theme-toggle" id="themeBtn" onclick="toggleTheme()">🌙</button>
   </nav>
 </header>
+
+<div id="loader-wrapper">
+  <div class="loader-content">
+    <div class="loader-circle"></div>
+    <h2 class="loader-text">Qazaq Cinema Code</h2>
+  </div>
+</div>
 
 <section class="hero">
   <div data-aos="fade-up">
@@ -39,12 +42,6 @@
     </button>
   </div>
 </section>
-<div id="loader-wrapper">
-    <div class="loader-content">
-        <div class="loader-circle"></div>
-        <h2 class="loader-text">Qazaq Cinema Code</h2>
-    </div>
-</div>
 
 <div class="container">
 
@@ -58,9 +55,7 @@
 
   <section id="catalog">
     <h2 class="section-title" data-aos="fade-up" style="margin-top:100px;">Кино-Талдау</h2>
-
     <div class="movie-list">
-
       <div class="movie-detail-card" data-aos="fade-right">
         <div class="movie-img-large" style="background-image:url('images/1.jpg');"></div>
         <div class="movie-text">
@@ -94,7 +89,7 @@
       <div class="movie-detail-card" data-aos="fade-left">
         <div class="movie-img-large" style="background-image:url('images/4.jpg');"></div>
         <div class="movie-text">
-          <span class="tag">#САТУС #НАМЫС</span>
+          <span class="tag">#СТАТУС #НАМЫС</span>
           <h3>Күшік құда</h3>
           <p><b>Мәдени код:</b> Әлеуметтік мәртебе мен ерлер арасындағы намыс коды. Құдалық этикетінің заманауи комедиялық интерпретациясы.</p>
           <button class="play-trailer-btn" data-video="-SJlyPQawdM">Трейлер</button>
@@ -110,7 +105,6 @@
           <button class="play-trailer-btn" data-video="0arwq1SorVU">Трейлер</button>
         </div>
       </div>
-
     </div>
   </section>
 
@@ -154,29 +148,54 @@
 
   <section id="analysis" style="margin-top:100px;">
     <h2 class="section-title" data-aos="fade-up">Зерттеу нәтижелері</h2>
-    <div class="stats-wrapper" data-aos="fade-up">
-      <div class="chart-container">
-        <canvas id="surveyChart"></canvas>
+
+    <div class="stats-grid">
+      <div class="stats-card" data-aos="fade-up">
+        <h3>Кино жанрндағы басымдылық (%)</h3>
+        <div class="chart-container"><canvas id="genreChart"></canvas></div>
       </div>
-      <div class="stats-text">
-        <p><b>Сауалнама нәтижесі:</b> Респонденттердің 92%-ы комедиялық фильмдер ұлттық дәстүрлерді түсінуге көмектеседі деп есептейді.</p>
-        <p>Кино — жастарға ұлттық кодты жеткізудің ең тиімді жолы.</p>
+
+      <div class="stats-card" data-aos="fade-up">
+        <h3>Мәдени кодты түсінуге әсері (%)</h3>
+        <div class="chart-container"><canvas id="impactChart"></canvas></div>
+      </div>
+
+      <div class="stats-card" data-aos="fade-up">
+        <h3>Жиі байқалатын элементтер (%)</h3>
+        <div class="chart-container"><canvas id="codesChart"></canvas></div>
+      </div>
+
+      <div class="stats-card" data-aos="fade-up">
+        <h3>Құндылықтарды сақтаудағы үлесі (%)</h3>
+        <div class="chart-container"><canvas id="valuesChart"></canvas></div>
+      </div>
+
+      <div class="stats-card" data-aos="fade-up">
+        <h3>Дәстүрлерді жиі көрсету қажеттілігі (%)</h3>
+        <div class="chart-container"><canvas id="futureChart"></canvas></div>
+      </div>
+    </div>
+
+    <div class="stats-summary" data-aos="fade-up" style="margin-top: 50px; text-align: center;">
+      <div class="content-text">
+        <p><b>Қорытынды:</b> 30 респондент арасында өткізілген сауалнама нәтежиелеріне сүйенсек, халықтың <b>92%-ы</b> комедияны ұлттық тәрбие құралы ретінде таниды. Сонымен қатар, көрермендердің <b>76.7%-ы</b> болашақ туындыларда салт-дәстүрлердің бұдан да кеңірек насихатталғанын қалайды.</p>
       </div>
     </div>
   </section>
 
 </div>
+
 <div id="videoModal" class="video-modal">
-    <div class="modal-content">
-        <span class="close-modal">&times;</span>
-        <div class="video-container">
-            <iframe id="trailerPlayer" src="" frameborder="0" allowfullscreen allow="autoplay"></iframe>
-        </div>
+  <div class="modal-content">
+    <span class="close-modal">&times;</span>
+    <div class="video-container">
+      <iframe id="trailerPlayer" src="" frameborder="0" allowfullscreen allow="autoplay"></iframe>
     </div>
+  </div>
 </div>
 
 <footer>
-  <p>© 2026 Ертай Алтынай, Нұралы Нұрай | Қазақ тілі мен әдебиеті</p>
+  <p>© 2026 Ертай Алтынай, Нұралы Нұрай</p>
 </footer>
 
 <script src="js/script.js"></script>
